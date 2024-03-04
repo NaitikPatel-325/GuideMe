@@ -1,0 +1,109 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+Venv/
+myvenv/
+env/
+ENV/
+
+# Database
+*.sqlite3
+
+# IDEs and editors
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.user
+*.suo
+*.cache/
+*.project
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.sqlite
+*.csv
+*.log
+*.npmrc
+*.yarn-integrity
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite3
+
+# Operating System
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Python
+*.pyc
+*.pyo
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Translation
+*.mo
+*.pot
+
+# Django
+*.log
+local_settings.py
+
+# Node.js
+node_modules/
+
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Package files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Custom
+custom_folder/
