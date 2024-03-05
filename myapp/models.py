@@ -1,10 +1,20 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+User_Choices = ( 
+    ("guide", "Guide"), 
+    ("user", "User"), 
+) 
+
 class User(AbstractUser):
     user_id = models.IntegerField(primary_key = True)
     password = models.CharField(max_length=8, blank=False, null=False)
     email = models.EmailField()
+    userType = models.CharField( 
+        max_length = 20, 
+        choices = User_Choices, 
+        default = "user",
+    )
     bio = models.CharField(max_length=255,blank=True)
     profile_picture = models.ImageField(upload_to='user_profile_pics/', blank=True, null=True)
     phone_number = models.CharField(max_length=15, blank=True)
