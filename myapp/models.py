@@ -3,9 +3,10 @@ from django.db import models
 
 class User(AbstractUser):
     user_id = models.IntegerField(primary_key = True)
-    bio = models.TextField(blank=True)
+    password = models.CharField(max_length=8, blank=False, null=False)
+    email = models.EmailField()
+    bio = models.CharField(max_length=255,blank=True)
     profile_picture = models.ImageField(upload_to='user_profile_pics/', blank=True, null=True)
-    date_of_birth = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=15, blank=True)
     address = models.CharField(max_length=255, blank=True, null=True)
 
