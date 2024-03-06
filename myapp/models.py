@@ -7,7 +7,6 @@ User_Choices = (
 ) 
 
 class User(AbstractUser):
-    user_id = models.IntegerField(primary_key = True)
     email = models.EmailField()
     userType = models.CharField( 
         max_length = 20, 
