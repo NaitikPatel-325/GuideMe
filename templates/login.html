@@ -4,33 +4,72 @@
 
 {% block content %}
 {% comment %} {{form.as_p}} {% endcomment %}
+{% if messages %}
+    <ul id="messages" class="bg-red-100 p-4 rounded-lg messages">
+        {% for message in messages %}
+            <li class="text-red-500">{{ message }}</li>
+        {% endfor %}
+    </ul>   
+{% endif %}
+
 <section class="bg-gray-50 dark:bg-gray-900">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                <h1 class="text-xl font-bold text-center leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Sign in to your account
                 </h1>
                 <form class="space-y-4 md:space-y-6" method="post">
                     {% csrf_token %}
-
-                    <div>
-                        <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
+                
+                    <div class="flex items-center space-x-2" style="padding-left: 8px;">
+                        <label for="username" class="text-sm font-medium text-gray-900 md:text-lg dark:text-white">Your Username </label>
                         {{ form.username }}
                     </div>
-                    <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                
+                    <div class="flex items-center space-x-2 md:text-lg" style="padding-left: 8px;">
+                        <label for="password" class="text-sm font-medium text-gray-900 dark:text-white md:text-lg">Password </label>
                         {{ form.password }}
                     </div>
-                  
-                    <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 dark:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                
+                    <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 dark:bg-blue-700 md:text-lg focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                    
                     <p class="text-sm font-light dark:text-white">
-                        Don’t have an account yet? <a href="/register" class="font-medium text-primary-600 hover:underline dark:text-white  ">Sign up</a>
+                        Don’t have an account yet? <a href="/register" class="font-medium text-primary-600 hover:underline md:text-lg dark:text-white">Sign up</a>
                     </p>
                 </form>
+                
             </div>
         </div>
     </div>
   </section>
+  
+  <style>
+    .messages {
+        animation: fadeOut 2s ease-in-out forwards;
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            height: 0;
+            padding: 0;
+            margin: 0;
+        }
+    }
+</style>
+
+<script>
+    setTimeout(function() {
+        var messagesElement = document.getElementById('messages');
+        if (messagesElement) {
+            messagesElement.style.animation = 'none';  
+            messagesElement.style.display = 'none';
+        }
+    }, 2000);
+</script>
 {% endblock %}

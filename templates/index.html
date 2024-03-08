@@ -3,7 +3,15 @@
 
 {% block content %}
 <div class="dark:text-white">
-    <h1>Welcome to the Home Page!</h1>
-    <p>Flowbite is a set of modern CSS utility classes for building beautiful websites fast.</p>
+    {% if user.is_authenticated %}
+        <h1>Welcome, {{ user.username }}!</h1>
+        </div>
+            <a href="#booking" class="menu-btn">Hire a Guide</a>
+        </div>
+        <p>You are authenticated. Flowbite is a set of modern CSS utility classes for building beautiful websites fast.</p>
+    {% else %}
+        <h1>Welcome to the Home Page!</h1>
+        <p>Flowbite is a set of modern CSS utility classes for building beautiful websites fast.</p>
+    {% endif %}
 </div>
 {% endblock %}

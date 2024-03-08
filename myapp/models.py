@@ -16,7 +16,7 @@ class User(AbstractUser):
     bio = models.CharField(max_length=255,blank=True)
     profile_picture = models.ImageField(upload_to='user_profile_pics/', blank=True, null=True)
     phone_number = models.CharField(max_length=15, blank=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
 
 
 # class Guide(models.Model):

@@ -1,9 +1,15 @@
+from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,authenticate
 from .forms import CustomUserCreationForm,LoginForm;
-# Create your views here.
+
 def home(request):
-    return render(request, 'index.html')
+    context = {
+        'user': request.user,
+        'is_authenticated': request.user.is_authenticated
+    }
+    return render(request, 'index.html', context)
+
 
 def about(request):
     return render(request, 'about.html')
@@ -15,14 +21,16 @@ def user_login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            print(username, password)
+            # print(username, password)
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 # print('user is not none')
                 login(request, user)
+                messages.success(request, 'Successfully logged in!')
                 return redirect('home')
             else:
-                form.add_error(None, 'Invalid login credentials') 
+                print('user is none')
+                messages.error(request, 'Invalid login credentials')
     else:
         form = LoginForm()
     
@@ -35,11 +43,13 @@ def register(request):
             print('form is valid')
             user = form.save()
             login(request, user)
-            print('user created' + user.username)
+            # print('user created' + user.username)
             return redirect('home')
+        else:
+            messages.error(request, 'Invalid registration credentials')
     else:
         form = CustomUserCreationForm()
-        print(form.errors)  # Move the print statement here
+        print(form.errors)  
 
     return render(request, 'register.html', {'form': form})
  
