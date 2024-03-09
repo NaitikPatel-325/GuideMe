@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+
+
 {% if messages %}
     <ul id="messages" class="bg-red-100 p-4 rounded-lg messages">
         {% for message in messages %}
@@ -7,13 +9,13 @@
         {% endfor %}
     </ul>   
 {% endif %}
-
 {% block content %}
+
   <div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
     <form method="post" class="w-full max-w-md p-8 bg-white rounded-lg shadow-md dark:border dark:bg-gray-800 dark:border-gray-700 space-y-4 md:space-y-6">
 
       {% csrf_token %}
-
+      
       <div class="mb-4">
         <label for="{{ form.username.id_for_label }}" class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">Username:</label>
         {{ form.username }}
@@ -43,16 +45,6 @@
       <div class="mb-4">
         <label for="confirm_password" class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white">Confirm Password:</label>
         {{ form.password2 }}
-      </div>
-
-      <div class="mb-4">
-        <label for="{{ form.bio.id_for_label }}" class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white">Bio:</label>
-        {{ form.bio }}
-      </div>
-
-      <div class="mb-4 none" id="id_locations">
-        <label for="{{ form.location.id_for_label }}" class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white">Locations :</label>
-        {{ form.location }}
       </div>
 
       <div class="mb-4">
@@ -91,27 +83,12 @@
 </style>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var userTypeSelect = document.getElementById('id_userType');
-        var locationField = document.getElementById('id_locations');
-
-        userTypeSelect.addEventListener('change', function() {
-            var userType = userTypeSelect.value;
-
-            if (userType == 'guide') {
-                locationField.classList.remove('none');
-            } else {
-                locationField.classList.add('none');
-            }
-        });
-
-        setTimeout(function() {
-            var messagesElement = document.getElementById('messages');
-            if (messagesElement) {
-                messagesElement.style.animation = 'none';  
-                messagesElement.style.display = 'none';
-            }
-        }, 2000);
-    });
+    setTimeout(function() {
+        var messagesElement = document.getElementById('messages');
+        if (messagesElement) {
+            messagesElement.style.animation = 'none';  
+            messagesElement.style.display = 'none';
+        }
+    }, 2000);
 </script>
 {% endblock %}

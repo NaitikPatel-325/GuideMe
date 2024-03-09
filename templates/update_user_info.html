@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-md shadow-md max-w-md w-full space-y-4">
+            <h1 class="text-3xl font-bold mb-4 text-center dark:text-white">Update User Information</h1>
+            <form method="post" enctype="multipart/form-data" class="space-y-4">
+                {% csrf_token %}
+                
+                <div>
+                    <label for="{{ form.username.id_for_label }}" class=" dark:text-white inline-block text-sm font-medium text-gray-700">Username  </label>
+                    {{ form.username }}
+                </div>
+
+                <div class="mb-4">
+                    <label for="{{ form.password1.id_for_label }}" class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white">Password:</label>
+                    {{ form.password1 }}
+                </div>
+                
+                <div class="mb-4">
+                    <label for="confirm_password" class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white">Confirm Password:</label>
+                    {{ form.password2 }}
+                </div>
+
+                <div>
+                    <label for="{{ form.email.id_for_label }}" class="inline-block text-sm font-medium dark:text-white text-gray-700">Email   </label>
+                    {{ form.email }}
+                </div>
+
+                <div>
+                    <label for="{{ form.phone_number.id_for_label }}" class="inline-block dark:text-white text-sm font-medium text-gray-700">Phone Number</label>
+                    {{ form.phone_number }}
+                </div>
+
+                <div>
+                    <label for="{{ form.profile_picture.id_for_label }}" class="dark:text-white inline-block text-sm font-medium text-gray-700">Profile Picture</label>
+                    {{ form.profile_picture }}
+                </div>
+
+                <div class="flex items-center justify-end">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Update Information</button>
+                    <a href="{% url 'User_Profile' %}" class="ml-4 text-gray-500 hover:underline">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

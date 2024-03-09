@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 ">
+
+  <form method="post" class="w-full max-w-md p-8 bg-white rounded-lg shadow-md dark:border dark:bg-gray-800 dark:border-gray-700 space-y-4 md:space-y-6">
+    {% csrf_token %}
+    
+    <div class="mb-4">
+      <label for="{{ form.location.id_for_label }}" class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">
+        Locations
+      </label>
+      {{ form.location }}
+    </div>
+
+    <div class="mb-4">
+      <label for="{{ form.expertise.id_for_label }}" class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">
+        Expertise
+      </label>
+      {{ form.expertise }}
+    </div>
+
+    <div class="mb-4">
+      <label for="{{ form.hourly_rate.id_for_label }}" class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">
+        Hourly Rate
+      </label>
+      {{ form.hourly_rate }}
+    </div>
+
+    <div class="mb-4">
+      <label for="{{ form.available_for_hire.id_for_label }}" class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">
+        Available for Hire
+      </label>
+      {{ form.available_for_hire }}
+    </div>
+
+    <div class="mb-4">
+      <label for="{{ form.bio.id_for_label }}" class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">
+        Bio
+      </label>
+      {{ form.bio }}
+    </div>
+    <p class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">{{ form.location.help_text }}</p>
+    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+      Save
+    </button>
+  </form>
+  </div>
+{% endblock %}

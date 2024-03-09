@@ -5,7 +5,6 @@ User_Choices = (
     ("guide", "Guide"), 
     ("user", "User"), 
 ) 
-
 class User(AbstractUser):
     email = models.EmailField()
     userType = models.CharField( 
@@ -13,19 +12,18 @@ class User(AbstractUser):
         choices = User_Choices, 
         default = "user",
     )
-    bio = models.CharField(max_length=255,blank=True)
     profile_picture = models.ImageField(upload_to='user_profile_pics/', blank=True, null=True)
     phone_number = models.CharField(max_length=15, blank=True)
+
+
+class Guide(models.Model):
+    guide_user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     location = models.CharField(max_length=255, blank=True, null=True)
-
-
-# class Guide(models.Model):
-#     Guide_id = models.IntegerField(primary_key = True)
-#     bio = models.TextField(blank=True)
-#     profile_picture = models.ImageField(upload_to='guide_profile_pics/', blank=True, null=True)
-#     expertise = models.CharField(max_length=100)
-#     hourly_rate = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-#     available_for_hire = models.BooleanField(default=False)
+    profile_picture = models.ImageField(upload_to='guide_profile_pics/', blank=True, null=True)
+    expertise = models.CharField(max_length=100)
+    hourly_rate = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    available_for_hire = models.BooleanField(default=False)
+    bio = models.TextField(blank=True)
 
 
 # class Booking(models.Model):
