@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,authenticate,logout
+from .models import Guide
 from .forms import CustomUserCreationForm,LoginForm,GuideForm;
 
 def home(request):
@@ -44,8 +45,8 @@ def user_login(request):
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
-        # print('user createsdsxxd' )
-        # print(form)
+        print('user createsdsxxd' )
+        print(form.errors)
         if form.is_valid():
             print('form is valid')
             user = form.save()
@@ -113,14 +114,36 @@ def update_user_info(request):
 
 def update_guide_info(request):
     guide = request.user.guide
+    user = request.user
+
     if request.method == 'POST':
-        form = GuideForm(request.POST, instance=guide)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Guide information updated successfully')
-            return redirect('Guide_Profile')
+        user_form = CustomUserCreationForm(request.POST, instance=user)
+        guide_form = GuideForm(request.POST, instance=guide)
+
+        print(user_form.errors)
+        print(guide_form.errors)
+        if user_form.is_valid() and guide_form.is_valid():
+            user_form.save()
+            guide_form.save()
+            login(request, user)
+            messages.success(request, 'User and Guide information updated successfully')
+            return redirect('home')
         else:
-            messages.error(request, 'Invalid guide information')
+            messages.error(request, 'Invalid user or guide information')
     else:
-        form = GuideForm(instance=guide)
-    return render(request, 'Guide_Profile.html', {'form': form})
+        user_form = CustomUserCreationForm(instance=user)
+        guide_form = GuideForm(instance=guide)
+
+    return render(request, 'update_guide_info.html', {'user_form': user_form, 'guide_form': guide_form})
+
+def pricing(request):
+    user = request.user
+    guides = Guide.objects.all()
+    context = {
+        'user': user,
+        'guides': guides
+    }
+    for guide in guides:
+        print(guide.guide_user)
+    return render(request, 'pricing.html', context)
+

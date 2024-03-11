@@ -11,7 +11,7 @@
                     <p class="text-xl dark:text-white font-bold mb-4"><strong>Name:</strong> {{ user.username }}</p>
                     <p class="mb-2 dark:text-white"><strong>Email:</strong> {{ user.email }}</p>
                     <p class="mb-2 dark:text-white"><strong>Phone Number:</strong> {{ user.phone_number|default:"Not specified" }}</p>
-                    <a href="/update_user_info" class="text-blue-500 hover:underline" id="updateUserModal">Update Information</a>
+                    <a href="/update_user_info" class="text-blue-500 hover:underline" >Update Information</a>
                     <a href="{% url 'logout' %}" class="text-red-500 hover:underline ml-4">Logout</a>
                 </div>
                 

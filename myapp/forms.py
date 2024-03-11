@@ -12,9 +12,16 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['userType'].required = False
 
     def clean_username(self):
-        # If the username field is not intended to change, return the current username
-        return self.instance.username
+        username = self.cleaned_data.get('username')
+        
+        if not username:
+            raise forms.ValidationError("Username cannot be empty.")
 
+        if self.instance and self.instance.username == username:
+            return username
+
+        return username
+    
 class GuideForm(forms.ModelForm):
     location = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Enter locations separated by commas'}),

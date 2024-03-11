@@ -14,6 +14,8 @@
                     <p class="mb-2 dark:text-white"><strong>Hourly Rate:</strong> {{ guide.hourly_rate|default:"Not specified" }}</p>
                     <p class="mb-2 dark:text-white"><strong>Available for Hire:</strong> {% if guide.available_for_hire %}Yes{% else %}No{% endif %}</p>
                     <p class="mb-2 dark:text-white"><strong>Bio:</strong> {{ guide.bio|default:"No bio available" }}</p>
+                    <a href="/update_guide_info" class="text-blue-500 hover:underline" >Update Information</a>
+                    <a href="{% url 'logout' %}" class="text-red-500 hover:underline ml-4">Logout</a>
                 </div>
                 
             </div>

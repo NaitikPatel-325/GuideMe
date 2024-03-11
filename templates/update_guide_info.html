@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-md shadow-md max-w-md w-full space-y-4">
+            <h1 class="text-3xl font-bold mb-4 text-center dark:text-white">Update Guide Information</h1>
+            <form method="post" enctype="multipart/form-data" class="space-y-4">
+                {% csrf_token %}
+
+                <div>
+                    <label for="{{ user_form.username.id_for_label }}" class="dark:text-white inline-block text-sm font-medium text-gray-700">Username</label>
+                    {{ user_form.username }}
+                </div>
+
+                <div>
+                    <label for="{{ user_form.email.id_for_label }}" class="dark:text-white inline-block text-sm font-medium text-gray-700">Email</label>
+                    {{ user_form.email }}
+                </div>
+
+                <div>
+                    <label for="{{ user_form.phone_number.id_for_label }}" class="dark:text-white inline-block text-sm font-medium text-gray-700">Phone Number</label>
+                    {{ user_form.phone_number }}
+                </div>
+                
+                <div class="mb-4">
+                    <label for="{{ user_form.password.id_for_label }}" class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white">Password:</label>
+                    {{ user_form.password1 }}
+                </div>
+                
+                <div class="mb-4">
+                    <label for="confirm_password" class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white">Confirm Password:</label>
+                    {{ user_form.password2 }}
+                </div>
+                
+                <div>
+                    <label for="{{ user_form.profile_picture.id_for_label }}" class="dark:text-white inline-block text-sm font-medium text-gray-700">Profile Picture</label>
+                    {{ user_form.profile_picture }}
+                </div>
+
+                <div>
+                    <label for="{{ guide_form.location.id_for_label }}" class="dark:text-white inline-block text-sm font-medium text-gray-700">Location</label>
+                    {{ guide_form.location }}
+                </div>
+
+                <div>
+                    <label for="{{ guide_form.guide_user.profile_picture.id_for_label }}" class="dark:text-white inline-block text-sm font-medium text-gray-700">Guide Profile Picture</label>
+                    {{ guide_form.guide_user.profile_picture }}
+                </div>
+
+                <div>
+                    <label for="{{ guide_form.expertise.id_for_label }}" class="dark:text-white inline-block text-sm font-medium text-gray-700">Expertise</label>
+                    {{ guide_form.expertise }}
+                </div>
+
+                <div>
+                    <label for="{{ guide_form.hourly_rate.id_for_label }}" class="dark:text-white inline-block text-sm font-medium text-gray-700">Hourly Rate</label>
+                    {{ guide_form.hourly_rate }}
+                </div>
+
+                <div>
+                    <label for="{{ guide_form.available_for_hire.id_for_label }}" class="dark:text-white inline-block text-sm font-medium text-gray-700">Available for Hire</label>
+                    {{ guide_form.available_for_hire }}
+                </div>
+
+                <div>
+                    <label for="{{ guide_form.bio.id_for_label }}" class="dark:text-white inline-block text-sm font-medium text-gray-700">Bio</label>
+                    {{ guide_form.bio }}
+                </div>
+
+                <div class="flex items-center justify-end">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Update Information</button>
+                    <a href="{% url 'User_Profile' %}" class="ml-4 text-gray-500 hover:underline">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}
