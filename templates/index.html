@@ -1,17 +1,50 @@
 {% extends 'base.html' %}
-
-
 {% block content %}
+
+<style>
+    body {
+        background-image: url('https://cdn.dribbble.com/users/3893315/screenshots/15837983/media/b339f404681fd7e05ce9225d1ae8cb07.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh; /* Ensure the body takes up the full height of the viewport */
+    }
+    .centered-text {
+        text-align: center;
+        text-decoration: double;
+        font-family:'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+        font-size: 20px;
+        margin-top: 50px; /* Adjust vertical positioning as needed */
+    }
+    .description-text {
+        text-align: center;
+        margin-top: 20px; /* Adjust vertical spacing as needed */
+        font-size: 20px; /* Adjust font size as needed */
+    }
+    .hire-guide-btn {
+        display: float;
+        margin: 10px 20px auto 10px; /* Center button horizontally and add bottom margin */
+        padding: 8px 16px; /* Smaller padding for button */
+        background-color: rgb(53, 49, 49); /* Black background */
+        color: white; /* White text */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-decoration: none; /* Remove underline */
+        
+    }
+    .hire-guide-btn:hover {
+        background-color: #333; /* Darker black on hover */
+    }
+</style>
+
 <div class="dark:text-white">
-    {% if user.is_authenticated %}
-        <h1>Welcome, {{ user.username }}!</h1>
-        </div>
-            <a href="#booking" class="menu-btn">Hire a Guide</a>
-        </div>
-        <p>You are authenticated. Flowbite is a set of modern CSS utility classes for building beautiful websites fast.</p>
-    {% else %}
-        <h1>Welcome to the Home Page!</h1>
-        <p>Flowbite is a set of modern CSS utility classes for building beautiful websites fast.</p>
-    {% endif %}
+    <div class="centered-text">
+        <h1 style="font-size: 40px;">Find the hidden place</h1>
+        <p class="description-text" style="margin-bottom: 10px;">with our experienced guides</p>
+        <a href="#booking" class="hire-guide-btn">Hire a Guide</a>
+    </div>
 </div>
+
 {% endblock %}

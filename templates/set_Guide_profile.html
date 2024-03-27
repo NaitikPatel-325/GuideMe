@@ -1,49 +1,78 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    body {
+        background-image: url('https://cdn.dribbble.com/users/3893315/screenshots/15837983/media/b339f404681fd7e05ce9225d1ae8cb07.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh; /* Ensure the body takes up the full height of the viewport */
+    }
+
+    .messages {
+        animation: fadeOut 2s ease-in-out forwards;
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            height: 0;
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    .none {
+        display: none;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form select,
+    form textarea{
+        border: 1px solid black;
+       
+    }
+</style>
+
 <div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 ">
 
-  <form method="post" class="w-full max-w-md p-8 bg-white rounded-lg shadow-md dark:border dark:bg-gray-800 dark:border-gray-700 space-y-4 md:space-y-6">
-    {% csrf_token %}
-    
-    <div class="mb-4">
-      <label for="{{ form.location.id_for_label }}" class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">
-        Locations
-      </label>
-      {{ form.location }}
-    </div>
+    <form method="post" class="w-full max-w-md p-8 bg-white rounded-lg shadow-md dark:border dark:bg-gray-800 dark:border-gray-700 space-y-4 md:space-y-6">
+        {% csrf_token %}
+        
+        <div class="mb-4">
+            <label for="{{ form.location.id_for_label }}" class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white">Locations</label>
+            {{ form.location }}
+        </div>
 
-    <div class="mb-4">
-      <label for="{{ form.expertise.id_for_label }}" class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">
-        Expertise
-      </label>
-      {{ form.expertise }}
-    </div>
+        <div class="mb-4">
+            <label for="{{ form.expertise.id_for_label }}"  class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white">Expertise</label>
+            {{ form.expertise }}
+        </div>
 
-    <div class="mb-4">
-      <label for="{{ form.hourly_rate.id_for_label }}" class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">
-        Hourly Rate
-      </label>
-      {{ form.hourly_rate }}
-    </div>
+        <div class="mb-4">
+            <label for="{{ form.hourly_rate.id_for_label }}"  class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white">Hourly Rate</label>
+            {{ form.hourly_rate }}
+        </div>
 
-    <div class="mb-4">
-      <label for="{{ form.available_for_hire.id_for_label }}" class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">
-        Available for Hire
-      </label>
-      {{ form.available_for_hire }}
-    </div>
+        <div class="mb-4">
+            <label for="{{ form.available_for_hire.id_for_label }}" class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white">Available for Hire</label>
+            {{ form.available_for_hire }}
+        </div>
 
-    <div class="mb-4">
-      <label for="{{ form.bio.id_for_label }}" class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">
-        Bio
-      </label>
-      {{ form.bio }}
-    </div>
-    <p class="inline-block  text-sm font-medium text-gray-900 md:text-lg dark:text-white">{{ form.location.help_text }}</p>
-    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-      Save
-    </button>
-  </form>
-  </div>
+          <div class="mb-4">
+            <label for="{{ form.bio.id_for_label }}">Bio</label>
+            {{ form.bio }}
+        </div>
+        
+        <p class="inline-block text-sm font-medium text-gray-900 md:text-lg dark:text-white ">{{ form.location.help_text }}</p>
+
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">Save</button>
+    </form>
+</div>
 {% endblock %}

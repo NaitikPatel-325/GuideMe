@@ -2,6 +2,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    body {
+        background-image: url('https://cdn.dribbble.com/users/3893315/screenshots/15837983/media/b339f404681fd7e05ce9225d1ae8cb07.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh; /* Ensure the body takes up the full height of the viewport */
+    }
+</style>
+
     <div class="container mx-auto p-6">
 
         <div class="flex flex-wrap justify-around">
@@ -14,21 +24,23 @@
                     <p class="mb-2 dark:text-white"><strong>Hourly Rate:</strong> {{ guide.hourly_rate|default:"Not specified" }}</p>
                     <p class="mb-2 dark:text-white"><strong>Available for Hire:</strong> {% if guide.available_for_hire %}Yes{% else %}No{% endif %}</p>
                     <p class="mb-2 dark:text-white"><strong>Bio:</strong> {{ guide.bio|default:"No bio available" }}</p>
-                    <a href="/update_guide_info" class="text-blue-500 hover:underline" >Update Information</a>
-                    <a href="{% url 'logout' %}" class="text-red-500 hover:underline ml-4">Logout</a>
+                    <a href="/update_guide_info" class="text-blue-900 hover:underline" >Update Information</a>
+                    <a href="{% url 'logout' %}" class="text-red-800 hover:underline ml-4">Logout</a>
                 </div>
                 
             </div>
 
             <div class="w-full md:w-1/2 lg:w-2/3 xl:w-3/4 md:flex flex-col justify-between">
-                <h1 class="dark:text-white text-center text-4xl mb-4">History</h1>    
+                <h1 class="dark:text-white text-center text-4xl mb-4 font-sans">History</h1>
+                
+                
                 <div class="flex flex-row flex-wrap justify-around">
-                    <div class="bg-gray-200 rounded-md p-4 mb-4">
+                    <div class="bg-indigo-300 rounded-md p-4 mb-4">
                         <h2 class="text-xl font-bold mb-2">Static Card 1</h2>
                         <p>This is the content of the first static card.</p>
                     </div>
 
-                    <div class="bg-gray-200 rounded-md p-4">
+                    <div class="bg-indigo-300 rounded-md p-4">
                         <h2 class="text-xl font-bold mb-2">Static Card 2</h2>
                         <p>This is the content of the second static card.</p>
                     </div>

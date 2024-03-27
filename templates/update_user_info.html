@@ -1,6 +1,34 @@
 {% extends 'base.html' %}
-{% block content %}
-    <div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+{% block content %}<style>
+    body {
+        background-image: url('https://cdn.dribbble.com/users/3893315/screenshots/15837983/media/b339f404681fd7e05ce9225d1ae8cb07.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh; /* Ensure the body takes up the full height of the viewport */
+    }
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form select,
+    form textarea{
+        border: 1px solid black;
+        padding: 8px; /* Adjust padding as needed */
+        width: calc(100% - 16px); /* Adjust width as needed */
+        margin-top: 6px; /* Adjust margin-top as needed */
+        margin-bottom: 12px; /* Adjust margin-bottom as needed */
+    }
+    .form-label {
+        margin-bottom: 4px; /* Adjust margin-bottom for labels */
+        display: block;
+        
+        font-weight: 500; /* Adjust font weight as needed */
+    }
+    .form-button {
+        margin-top: 16px; /* Adjust margin-top for button */
+    }
+</style>
+<class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
 
         <div class="bg-white dark:bg-gray-800 p-8 rounded-md shadow-md max-w-md w-full space-y-4">
             <h1 class="text-3xl font-bold mb-4 text-center dark:text-white">Update User Information</h1>

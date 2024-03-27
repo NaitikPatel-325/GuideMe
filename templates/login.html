@@ -3,6 +3,17 @@
 {% block title %}Home - Django + Tailwind CSS + Flowbite{% endblock %}
 
 {% block content %}
+<style>
+    body {
+        background-image: url('https://cdn.dribbble.com/users/3893315/screenshots/15837983/media/b339f404681fd7e05ce9225d1ae8cb07.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh; /* Ensure the body takes up the full height of the viewport */
+    }
+  
+</style>
+
 {% comment %} {{form.as_p}} {% endcomment %}
 {% if messages %}
     <ul id="messages" class="bg-red-100 p-4 rounded-lg messages">
@@ -13,7 +24,7 @@
 {% endif %}
 
 <section class="bg-gray-50 dark:bg-gray-900">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 small-flex-container">
         
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -24,7 +35,7 @@
                     {% csrf_token %}
                 
                     <div class="flex items-center space-x-2" style="padding-left: 8px;">
-                        <label for="username" class="text-sm font-medium text-gray-900 md:text-lg dark:text-white">Username </label>
+                        <label for="username" class="text-sm font-medium text-gray-900 md:text-lg dark:text-white">Your Username </label>
                         {{ form.username }}
                     </div>
                 
@@ -32,8 +43,9 @@
                         <label for="password" class="text-sm font-medium text-gray-900 dark:text-white md:text-lg">Password </label>
                         {{ form.password }}
                     </div>
-                
-                    <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 dark:bg-blue-700 md:text-lg focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                 
+      <button type="submit" class="w-full text-white bg-blue-700 md:text-lg bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign In</button>
+                    
                     
                     <p class="text-sm font-light dark:text-white">
                         Don’t have an account yet? <a href="/register" class="font-medium text-primary-600 hover:underline md:text-lg dark:text-white">Sign up</a>
@@ -43,9 +55,9 @@
             </div>
         </div>
     </div>
-  </section>
+</section>
   
-  <style>
+<style>
     .messages {
         animation: fadeOut 2s ease-in-out forwards;
     }
@@ -60,6 +72,10 @@
             padding: 0;
             margin: 0;
         }
+    }
+    input[type="text"],
+    input[type="password"] {
+        border: 1px solid black;
     }
 </style>
 
