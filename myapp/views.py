@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,authenticate,logout
-from .models import Guide
-from .forms import CustomUserCreationForm,LoginForm,GuideForm;
+from .models import Guide,Booking
+from .forms import CustomUserCreationForm,LoginForm,GuideForm,BookingForm;
 
 def home(request):
     context = {
@@ -138,12 +138,60 @@ def update_guide_info(request):
 
 def pricing(request):
     user = request.user
+    booking = None
+    if(user.userType == 'guide'):
+        guide_id = request.user.guide.id
+        booking = Booking.objects.filter(guide__id=guide_id)
     guides = Guide.objects.all()
     context = {
         'user': user,
-        'guides': guides
+        'guides': guides,
+        'booking': booking
     }
+    print(user.userType)
     for guide in guides:
-        print(guide.guide_user)
+        print(guide.guide_user.id)
     return render(request, 'pricing.html', context)
 
+
+def book_guide(request, guide_id):
+    # print(request.user.id)
+    # print(guide_id)
+    guide = Guide.objects.get(id=guide_id)
+    
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        print(form.errors)
+        print(form)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.user = request.user
+            booking.guide = guide  
+            print(booking)
+            booking.save()
+            return redirect('home')  
+    else:
+        form = BookingForm()
+
+    guide_locations = guide.location.split(',')
+
+    context = {
+        'form': form,
+        'guide_locations': guide_locations,
+    }
+
+    return render(request, 'booking_template.html', context)
+
+def accept_booking(request,booking_id):
+    print(request.GET)
+    booking = Booking.objects.get(booking_id=booking_id)
+    booking.status = 'accepted'
+    booking.save()
+    return redirect('pricing')
+
+def reject_booking(request,booking_id):
+    print(request.GET)
+    booking = Booking.objects.get(booking_id=booking_id)
+    booking.status = 'rejected'
+    booking.save()
+    return redirect('pricing')
