@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User,Guide
+from .models import User,Guide,Booking
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -38,3 +38,11 @@ class GuideForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+    
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['date', 'location', 'hrs']
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+        }
