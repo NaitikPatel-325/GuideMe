@@ -82,13 +82,14 @@ def set_Guide_profile(request):
 
 def User_Profile(request):
     user = request.user
-    
-    return render(request, 'User_Profile.html', {'user': user})
+    book = Booking.objects.filter(user__id=user.id)
+    return render(request, 'User_Profile.html', {'user': user, 'book': book})
 
 def Guide_Profile(request):
     guide = request.user.guide
     # print(guide)
-    return render(request, 'Guide_Profile.html', {'guide': guide})
+    book = Booking.objects.filter(guide__id=guide.id)
+    return render(request, 'Guide_Profile.html', {'guide': guide, 'book': book})
     
 def logout_request(request):
     logout(request)
@@ -193,3 +194,17 @@ def reject_booking(request,booking_id):
     booking.status = 'rejected'
     booking.save()
     return redirect('pricing')
+
+def complete_booking(request,booking_id):
+    print(request.GET)
+    booking = Booking.objects.get(booking_id=booking_id)
+    booking.status = 'completed'
+    booking.save()
+    return redirect('User_Profile')
+
+def rejects_booking(request,booking_id):
+    print(request.GET)
+    booking = Booking.objects.get(booking_id=booking_id)
+    booking.status = 'rejected'
+    booking.save()
+    return redirect('User_Profile')
