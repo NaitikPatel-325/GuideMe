@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+<style>
+    body {
+        background-image: url('https://cdn.dribbble.com/users/3893315/screenshots/15837983/media/b339f404681fd7e05ce9225d1ae8cb07.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh; /* Ensure the body takes up the full height of the viewport */
+    }
+        
+</style>
+<div class="flex items-end justify-end min-h-screen">
     <div class="bg-white dark:bg-gray-800 p-8 rounded-md shadow-md max-w-md w-full space-y-4">
         <h1 class="text-3xl font-bold mb-4 text-center dark:text-white">Update Guide Information</h1>
         <form method="post" enctype="multipart/form-data" class="space-y-4">
@@ -33,10 +43,7 @@
                 <label for="{{ guide_form.location.id_for_label }}" class="form-label dark:text-white">Location</label>
                 {{ guide_form.location }}
             </div>
-            <div>
-                <label for="{{ guide_form.guide_user.profile_picture.id_for_label }}" class="form-label dark:text-white">Guide Profile Picture</label>
-                {{ guide_form.guide_user.profile_picture }}
-            </div>
+        
             <div>
                 <label for="{{ guide_form.expertise.id_for_label }}" class="form-label dark:text-white">Expertise</label>
                 {{ guide_form.expertise }}
@@ -55,7 +62,7 @@
             </div>
             <div class="flex items-center justify-end form-button">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Update Information</button>
-                <a href="{% url 'User_Profile' %}" class="ml-4 text-gray-500 hover:underline">Cancel</a>
+                <a href="{% url 'Guide_Profile' %}" class="ml-4 hover:underline bg-blue-500 p-2 text-white rounded">Cancel</a>
             </div>
         </form>
     </div>

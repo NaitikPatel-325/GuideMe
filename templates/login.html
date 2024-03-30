@@ -2,6 +2,16 @@
 
 
 {% block content %}
+<style>
+    body {
+        background-image: url('https://cdn.dribbble.com/users/3893315/screenshots/15837983/media/b339f404681fd7e05ce9225d1ae8cb07.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh; /* Ensure the body takes up the full height of the viewport */
+    }
+        
+</style>
 
 
 {% if messages %}
@@ -12,8 +22,8 @@
     </ul>   
 {% endif %}
 
-<section class="bg-gray-50 dark:bg-gray-900">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 small-flex-container">
+<section >
+    <div class="flex flex-col items-end justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 small-flex-container">
         
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -24,7 +34,7 @@
                     {% csrf_token %}
                 
                     <div class="flex items-center space-x-2" style="padding-left: 8px;">
-                        <label for="username" class="text-sm font-medium text-gray-900 md:text-lg dark:text-white">Your Username </label>
+                        <label for="username" class="text-sm font-medium text-gray-900 md:text-lg dark:text-white">Username </label>
                         {{ form.username }}
                     </div>
                 
