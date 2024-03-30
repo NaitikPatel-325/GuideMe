@@ -1,62 +1,234 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %} {% if user.userType == "user" %}
+<div class="flex flex-row justify-around flex-wrap">
+  {% for guide in guides %}
+  <div
+    class="max-w-xs p-6 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-50 mb-8"
+  >
+    <img
+      src="https://source.unsplash.com/random/300x300/?1"
+      alt=""
+      class="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500 mb-4"
+    />
+    <div>
+      <p class="text-lg font-semibold">
+        {{ guide.guide_user.username }} - {{ guide.location }}
+      </p>
+      <span
+        class="block text-xs font-medium tracking-widest uppercase dark:text-violet-400"
+        >Quisque</span
+      >
+      <h2 class="text-xl font-semibold tracking-wide">Nam maximus purus</h2>
+      <button class="dark:bg-blue-900 text-white w-full p-2 mt-2">
+        <a href="/book_guide/{{ guide.id }}">Hire A Guide</a>
+      </button>
+    </div>
+    <p class="mt-4 dark:text-gray-100">
+      Mauris et lorem at elit tristique dignissim et ullamcorper elit. In sed
+      feugiat mi. Etiam ut lacinia dui.
+    </p>
+  </div>
+  {% endfor %}
+</div>
+{% elif user.userType == "guide" %}
+<div class="flex flex-row flec-wrap">
+  <button
+    class="text-white p-2 flex-1 hover:bg-blue-600"
+    onclick="showPending()"
+  >
+    Pending
+  </button>
+  <button
+    class="text-white p-2 flex-1 hover:bg-blue-600"
+    onclick="showAccepted()"
+  >
+    Accepted
+  </button>
+  <button
+    class="text-white p-2 flex-1 hover:bg-blue-600"
+    onclick="showCompleted()"
+  >
+    Complete
+  </button>
+  <button
+    class="text-white p-2 flex-1 hover:bg-blue-600"
+    onclick="showRejected()"
+  >
+    Rejected
+  </button>
+</div>
 
-{% block content %}
-<style>
-    body {
-        background-image: url('https://cdn.dribbble.com/users/3893315/screenshots/15837983/media/b339f404681fd7e05ce9225d1ae8cb07.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        height: 100vh; /* Ensure the body takes up the full height of the viewport */
-    }
-</style>
-    {% if user.userType == "user" %}
-
-        <div class="flex flex-row justify-content ">
-            <div class="max-w-xs p-6 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-50">
-                <img src="https://source.unsplash.com/random/300x300/?1" alt="" class="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500">
-                <div class="mt-6 mb-2">
-                    {% for guide in guides %}
-                        <p>{{ guide.guide_user.username }} - {{ guide.location}}</p>
-                    {% endfor %}
-                    <span class="block text-xs font-medium tracking-widest uppercase dark:text-violet-400">Quisque</span>
-                    <h2 class="text-xl font-semibold tracking-wide">Nam maximus purus</h2>
-                </div>
-                <p class="dark:text-gray-100">Mauris et lorem at elit tristique dignissim et ullamcorper elit. In sed feugiat mi. Etiam ut lacinia dui.</p>
-            </div>
+<div id="pending" class="block">
+  <div class="flex flex-row text-white p-4 mb-4">
+    {% for book in booking %}
+    <div class="flex flex-col rounded-md m-4 p-6">
+      {% if book.status == "pending" %}
+      <div
+        class="flex flex-col bg-gray-800 w-full rounded-md m-8 p-10 justify-content"
+      >
+        <div class="mb-2">
+          <span class="font-bold inline-block">Username:</span>
+          <p class="inline-block">{{ book.user.username }}</p>
         </div>
-    
-        
-    {% endif %}
+        <div class="mb-2">
+          <span class="font-bold inline-block">Location:</span>
+          <p class="inline-block">{{ book.location }}</p>
+        </div>
+        <div class="mb-2">
+          <span class="font-bold inline-block">Date:</span>
+          <p class="inline-block">{{ book.date }}</p>
+        </div>
+        <div class="mb-2">
+          <span class="font-bold inline-block">Hours:</span>
+          <p class="inline-block">{{ book.hrs }}</p>
+        </div>
+        <div class="mb-2">
+          <span class="font-bold inline-block">Status:</span>
+          <p class="inline-block">{{ book.status }}</p>
+        </div>
+        {% comment %} {{book.booking_id}} {% endcomment %}
+        <button class="bg-blue-900 w-full text-white p-2 mt-2 rounded-md">
+          <a href="/accept_booking/{{ book.booking_id }}">Accept</a>
+        </button>
+        <button class="bg-red-500 text-white p-2 mt-2 rounded-md">
+          <a href="/reject_booking/{{ book.booking_id}}">Reject</a>
+        </button>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div id="accepted" class="hidden">
+  <div class="flex flex-row text-white p-4 mb-4">
+    {% for book in booking %}
+    <div class="flex flex-col rounded-md m-4 p-6">
+      {% if book.status == "accepted" %}
+      <div class="flex flex-col bg-gray-800 rounded-md m-4 p-6">
+        <div class="mb-2">
+          <span class="font-bold inline-block">Username:</span>
+          <p class="inline-block">{{ book.user.username }}</p>
+        </div>
+        <div class="mb-2">
+          <span class="font-bold inline-block">Location:</span>
+          <p class="inline-block">{{ book.location }}</p>
+        </div>
+        <div class="mb-2">
+          <span class="font-bold inline-block">Date:</span>
+          <p class="inline-block">{{ book.date }}</p>
+        </div>
+        <div class="mb-2">
+          <span class="font-bold inline-block">Hours:</span>
+          <p class="inline-block">{{ book.hrs }}</p>
+        </div>
+        <div class="mb-2">
+          <span class="font-bold inline-block">Status:</span>
+          <p class="inline-block">{{ book.status }}</p>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <div id="completed" class="hidden">
+      <div class="flex flex-row text-white p-4 mb-4">
+        {% for book in booking %}
+        <div class="flex flex-col rounded-md m-4 p-6">
+          {% if book.status == "completed" %}
+          <div class="bg-grey-800">
+            <div class="mb-2">
+              <span class="font-bold inline-block">Username:</span>
+              <p class="inline-block">{{ book.user.username }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Location:</span>
+              <p class="inline-block">{{ book.location }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Date:</span>
+              <p class="inline-block">{{ book.date }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Hours:</span>
+              <p class="inline-block">{{ book.hrs }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Status:</span>
+              <p class="inline-block">{{ book.status }}</p>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div id="rejected" class="hidden">
+      <div class="flex flex-row text-white p-4 mb-4">
+        {% for book in booking %}
+        <div class="flex flex-col rounded-md m-4 p-6">
+          {% if book.status == "rejected" %}
+          <div class="flex flex-col bg-gray-800 rounded-md m-4 p-6">
+            <div class="mb-2">
+              <span class="font-bold inline-block">Username:</span>
+              <p class="inline-block">{{ book.user.username }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Location:</span>
+              <p class="inline-block">{{ book.location }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Date:</span>
+              <p class="inline-block">{{ book.date }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Hours:</span>
+              <p class="inline-block">{{ book.hrs }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Status:</span>
+              <p class="inline-block">{{ book.status }}</p>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% endif %} {% endif %}
+
     <script>
-        function showPending() {
-            console.log("Pending");
-            document.getElementById("pending").classList.remove("hidden");
-            document.getElementById("accepted").classList.add("hidden");
-            document.getElementById("completed").classList.add("hidden");
-            document.getElementById("rejected").classList.add("hidden");
-        }
-    
-        function showAccepted() {
-            document.getElementById("pending").classList.add("hidden");
-            document.getElementById("accepted").classList.remove("hidden");
-            document.getElementById("completed").classList.add("hidden");
-            document.getElementById("rejected").classList.add("hidden");
-        }
-    
-        function showCompleted() {
-            document.getElementById("pending").classList.add("hidden");
-            document.getElementById("accepted").classList.add("hidden");
-            document.getElementById("completed").classList.remove("hidden");
-            document.getElementById("rejected").classList.add("hidden");
-        }
-    
-        function showRejected() {
-            document.getElementById("pending").classList.add("hidden");
-            document.getElementById("accepted").classList.add("hidden");
-            document.getElementById("completed").classList.add("hidden");
-            document.getElementById("rejected").classList.remove("hidden");
-        }
+      function showPending() {
+        console.log("Pending");
+        document.getElementById("pending").classList.remove("hidden");
+        document.getElementById("accepted").classList.add("hidden");
+        document.getElementById("completed").classList.add("hidden");
+        document.getElementById("rejected").classList.add("hidden");
+      }
+
+      function showAccepted() {
+        document.getElementById("pending").classList.add("hidden");
+        document.getElementById("accepted").classList.remove("hidden");
+        document.getElementById("completed").classList.add("hidden");
+        document.getElementById("rejected").classList.add("hidden");
+      }
+
+      function showCompleted() {
+        document.getElementById("pending").classList.add("hidden");
+        document.getElementById("accepted").classList.add("hidden");
+        document.getElementById("completed").classList.remove("hidden");
+        document.getElementById("rejected").classList.add("hidden");
+      }
+
+      function showRejected() {
+        document.getElementById("pending").classList.add("hidden");
+        document.getElementById("accepted").classList.add("hidden");
+        document.getElementById("completed").classList.add("hidden");
+        document.getElementById("rejected").classList.remove("hidden");
+      }
     </script>
-    
-{% endblock %}
+
+    {% endblock %}
+  </div>
+</div>

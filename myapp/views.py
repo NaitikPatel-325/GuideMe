@@ -155,8 +155,6 @@ def pricing(request):
 
 
 def book_guide(request, guide_id):
-    # print(request.user.id)
-    # print(guide_id)
     guide = Guide.objects.get(id=guide_id)
     
     if request.method == 'POST':
