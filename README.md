@@ -63,6 +63,7 @@ Project Name: **Guide me**
   
 
 **Installation:**
+  
   1.Clone the repository.
   2.Install dependencies using pip install -r requirements.txt.
   3.Configure the database settings in settings.py.
@@ -74,7 +75,8 @@ Project Name: **Guide me**
 
 
 **Authors:**
-
+ Naitik Patel ["https://github.com/NaitikPatel-325/"]
+ Aarya Patel  ["https://github.com/Aarya1402"]
 
 
 **Acknowledgements:**
