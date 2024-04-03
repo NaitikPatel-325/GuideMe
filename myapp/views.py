@@ -84,6 +84,7 @@ def set_Guide_profile(request):
 def User_Profile(request):
     user = request.user
     book = Booking.objects.filter(user__id=user.id)
+    # print(user.profile_picture)
     return render(request, 'User_Profile.html', {'user': user, 'book': book})
 
 def Guide_Profile(request):

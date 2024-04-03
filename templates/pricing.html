@@ -22,7 +22,7 @@
 {% endif %}
 
   {%if user.userType == "guide" %}
-  <div class="flex flex-row flec-wrap">
+  <div class="flex flex-row flex-wrap">
     <button class=" p-2 flex-1 hover:bg-blue-300 " onclick="showPending()">
       Pending
     </button>
@@ -42,7 +42,7 @@
       {% for book in booking %}
       <div class="flex flex-col text-white rounded-md m-4 p-6">
         {% if book.status == "pending" %}
-        <div class="flex flex-col bg-gray-800 w-full rounded-md m-8 p-10 justify-content">
+        <div class="flex flex-col bg-gray-800 w-full rounded-md m-4 p-6 ">
           <div class="mb-2">
             <span class="font-bold inline-block">Username:</span>
             <p class="inline-block">{{ book.user.username }}</p>
@@ -112,7 +112,6 @@
 
   <div id="rejected" class="hidden">
     <div class="flex flex-row p-4 mb-4">
-      {% comment %} <p>Accepted</p> {% endcomment %}
       {% for book in booking %}
         <div class="flex flex-col text-white rounded-md m-4 p-6">
           {% if book.status == "rejected" %}
@@ -146,7 +145,6 @@
 
   <div id="completed" class="hidden">
     <div class="flex flex-row p-4 mb-4">
-      {% comment %} <p>Accepted</p> {% endcomment %}
       {% for book in booking %}
         <div class="flex flex-col text-white rounded-md m-4 p-6">
           {% if book.status == "completed" %}

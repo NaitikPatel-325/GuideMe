@@ -3,7 +3,7 @@
 {% block content %}
 <style>
     body {
-        background-image: url('https://cdn.dribbble.com/users/3893315/screenshots/15837983/media/b339f404681fd7e05ce9225d1ae8cb07.jpg');
+        background-image: url(/static/img/pgbg.jpg);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -40,7 +40,7 @@
     }
 </style>
 
-<div class="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 ">
+<div class="flex items-start justify-end min-h-screen">
 
     <form method="post" class="w-full max-w-md p-8 bg-white rounded-lg shadow-md dark:border dark:bg-gray-800 dark:border-gray-700 space-y-4 md:space-y-6">
         {% csrf_token %}
@@ -66,7 +66,7 @@
         </div>
 
           <div class="mb-4">
-            <label for="{{ form.bio.id_for_label }}">Bio</label>
+            <label for="{{ form.bio.id_for_label }}" class="text-white">Bio</label>
             {{ form.bio }}
         </div>
         
