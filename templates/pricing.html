@@ -2,7 +2,7 @@
 {% block content %} 
 <style>
   body {
-      background-image: url('https://cdn.dribbble.com/users/3893315/screenshots/15837983/media/b339f404681fd7e05ce9225d1ae8cb07.jpg');
+      background-image: url(/static/img/bg.jpeg);
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -10,7 +10,17 @@
   }
       
 </style>
- 
+
+{% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                $.notify("{{ message }}", "success"); 
+            {% endfor %}
+        });
+    </script>
+{% endif %}
+
   {%if user.userType == "guide" %}
   <div class="flex flex-row flec-wrap">
     <button class=" p-2 flex-1 hover:bg-blue-300 " onclick="showPending()">
@@ -100,6 +110,40 @@
     </div>
   </div>
 
+  <div id="rejected" class="hidden">
+    <div class="flex flex-row p-4 mb-4">
+      {% comment %} <p>Accepted</p> {% endcomment %}
+      {% for book in booking %}
+        <div class="flex flex-col text-white rounded-md m-4 p-6">
+          {% if book.status == "rejected" %}
+          <div class="flex flex-col bg-gray-800 rounded-md m-4 p-6">
+            <div class="mb-2">
+              <span class="font-bold inline-block">Username:</span>
+              <p class="inline-block">{{ book.user.username }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Location:</span>
+              <p class="inline-block">{{ book.location }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Date:</span>
+              <p class="inline-block">{{ book.date }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Hours:</span>
+              <p class="inline-block">{{ book.hrs }}</p>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold inline-block">Status:</span>
+              <p class="inline-block">{{ book.status }}</p>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
   <div id="completed" class="hidden">
     <div class="flex flex-row p-4 mb-4">
       {% comment %} <p>Accepted</p> {% endcomment %}
@@ -134,31 +178,30 @@
     </div>
   </div>
   
-    {%else%}
-      <div class="flex flex-row justify-around flex-wrap">
-        {% for guide in guides %}
-          <div class="max-w-xs p-6 bg-gray-800 text-white rounded-md shadow-md mb-8">
-            <img src="https://source.unsplash.com/random/300x300/?1" alt="" class="object-cover object-center w-full rounded-md h-72  mb-4"/>
-            <div>
-              <p class="text-lg inline-block font-semibold">
-                Guide Name: {{ guide.guide_user.username }}
-              <p class="text-lg inline-block font-semibold">
-                Locations : {{ guide.location}}                  
-              </p>
-
-              <p class="text-lg inline-block font-semibold">
-                Hour_rate : {{ guide.hourly_rate }}
-              </p>
-              <p class="text-lg inline-block font-semibold">
-                Languages : {{ guide.expertise }}
-              </p>
-              <button class="w-full p-2 mt-2">
-                <a href="/book_guide/{{ guide.id }}" class="bg-blue-300 w-full p-2">Hire A Guide</a>
-              </button>
-            </div>
+  {%else%}
+    <div class="flex flex-row justify-around flex-wrap">
+      {% for guide in guides %}
+        <div class="max-w-xs p-6 bg-gray-800 text-white rounded-md shadow-md mb-8">
+          <img src="https://source.unsplash.com/random/300x300/?1" alt="" class="object-cover object-center w-full rounded-md h-72  mb-4"/>
+          <div>
+            <p class="text-lg inline-block font-semibold">
+              Guide Name: {{ guide.guide_user.username }}
+            <p class="text-lg inline-block font-semibold">
+              Locations : {{ guide.location}}                  
+            </p>
+            <p class="text-lg inline-block font-semibold">
+              Hour_rate : {{ guide.hourly_rate }}
+            </p>
+            <p class="text-lg inline-block font-semibold">
+              Languages : {{ guide.expertise }}
+            </p>
+            <button class="w-full p-2 mt-2">
+              <a href="/book_guide/{{ guide.id }}" class="bg-blue-300 w-full p-2">Hire A Guide</a>
+            </button>
           </div>
-        {% endfor %}
-      </div>
+        </div>
+      {% endfor %}
+    </div>
       
     {% endif %} 
     <script>

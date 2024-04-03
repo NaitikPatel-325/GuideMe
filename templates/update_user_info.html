@@ -10,6 +10,16 @@
     }
 
 </style>
+{% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                $.notify("{{ message }}", "error"); 
+            {% endfor %}
+        });
+    </script>
+{% endif %}
+
 <div class="flex flex-col justify-center items-end min-h-screen ">
 
         <div class="bg-white dark:bg-gray-800 p-8 rounded-md shadow-md max-w-md w-full space-y-4">

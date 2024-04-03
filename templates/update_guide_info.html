@@ -10,6 +10,17 @@
     }
         
 </style>
+
+{% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                $.notify("{{ message }}", "error"); 
+            {% endfor %}
+        });
+    </script>
+{% endif %}
+
 <div class="flex items-end justify-end min-h-screen">
     <div class="bg-white dark:bg-gray-800 p-8 rounded-md shadow-md max-w-md w-full space-y-4">
         <h1 class="text-3xl font-bold mb-4 text-center dark:text-white">Update Guide Information</h1>

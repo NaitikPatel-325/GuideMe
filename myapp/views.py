@@ -12,7 +12,7 @@ def home(request):
     if request.user.is_authenticated:
         context['userType'] = request.user.userType
 
-    print(context)
+    # print(context)
     return render(request, 'index.html', context)
 
 
@@ -26,13 +26,13 @@ def user_login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            print(username, password)
+            # print(username, password)
             user = authenticate(request, username=username, password=password)
-            print(user)
+            # print(user)
             if user is not None:
                 # print('user is not none')
                 login(request, user)
-                messages.success(request, 'Successfully logged in!')
+                messages.success(request, 'Logged In Succesfully')
                 return redirect('home')
             else:
                 print('user is none')
@@ -55,6 +55,7 @@ def register(request):
             if user.userType == 'guide':
                 return redirect(request.get_full_path() + 'set_Guide_profile' ) 
             else:
+                messages.success(request,'Registration Succesfully')
                 return redirect('home')
         else:
             messages.error(request, 'Invalid registration credentials')
@@ -93,6 +94,7 @@ def Guide_Profile(request):
     
 def logout_request(request):
     logout(request)
+    messages.success(request, 'Logged Out Successfully')
     return redirect('home')
 
 def update_user_info(request):
@@ -127,10 +129,10 @@ def update_guide_info(request):
             user_form.save()
             guide_form.save()
             login(request, user)
-            messages.success(request, 'User and Guide information updated successfully')
+            messages.success(request, 'Guide information updated successfully')
             return redirect('home')
         else:
-            messages.error(request, 'Invalid user or guide information')
+            messages.error(request, 'Invalid guide information')
     else:
         user_form = CustomUserCreationForm(instance=user)
         guide_form = GuideForm(instance=guide)
@@ -168,6 +170,7 @@ def book_guide(request, guide_id):
             booking.guide = guide  
             print(booking)
             booking.save()
+            messages.success(request, 'Booking is successful')
             return redirect('home')  
     else:
         form = BookingForm()
@@ -186,6 +189,7 @@ def accept_booking(request,booking_id):
     booking = Booking.objects.get(booking_id=booking_id)
     booking.status = 'accepted'
     booking.save()
+    messages.success(request,'Boking is Accepted')
     return redirect('pricing')
 
 def reject_booking(request,booking_id):
@@ -193,6 +197,7 @@ def reject_booking(request,booking_id):
     booking = Booking.objects.get(booking_id=booking_id)
     booking.status = 'rejected'
     booking.save()
+    messages.success(request,'Boking is rejected')
     return redirect('pricing')
 
 def complete_booking(request,booking_id):

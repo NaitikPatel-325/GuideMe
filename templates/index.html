@@ -39,11 +39,33 @@
     }
 </style>
 
+{% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                $.notify("{{ message }}", "success"); 
+            {% endfor %}
+        });
+
+        function handlePricingClick() {
+            {% if not user.is_authenticated %}
+                $.notify("User Is Not Logged In", "error"); 
+                setTimeout(function() {
+                    window.location.href = "{% url 'user_login' %}"; 
+                }, 1500);
+                return false;
+            {% else %}
+                window.location.href = "{% url 'pricing' %}"; 
+            {% endif %}
+        }
+    </script>
+{% endif %}
+
 <div>
     <div class="centered-text">
         <h1 style="font-size: 40px;">Find the hidden place</h1>
         <p class="description-text" style="margin-bottom: 10px;">with our experienced guides</p>
-        <a href="/pricing" class="hire-guide-btn">Hire a Guide</a>
+        <a href="#" class="hire-guide-btn" onclick="handlePricingClick()">Hire a Guide</a>
     </div>
 </div>
 

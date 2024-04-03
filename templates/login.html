@@ -2,25 +2,30 @@
 
 
 {% block content %}
+
+  
 <style>
     body {
         background-image: url('https://cdn.dribbble.com/users/3893315/screenshots/15837983/media/b339f404681fd7e05ce9225d1ae8cb07.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        height: 100vh; /* Ensure the body takes up the full height of the viewport */
+        height: 100vh; 
     }
-        
+    
 </style>
 
-
 {% if messages %}
-    <ul id="messages" class="bg-red-100 p-4 rounded-lg messages">
-        {% for message in messages %}
-            <li class="text-red-500">{{ message }}</li>
-        {% endfor %}
-    </ul>   
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                $.notify("{{ message }}", "error"); 
+            {% endfor %}
+        });
+    </script>
 {% endif %}
+
+
 
 <section >
     <div class="flex flex-col items-end justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 small-flex-container">
@@ -53,36 +58,6 @@
         </div>
     </div>
 </section>
-  
-<style>
-    .messages {
-        animation: fadeOut 2s ease-in-out forwards;
-    }
 
-    @keyframes fadeOut {
-        0% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-            height: 0;
-            padding: 0;
-            margin: 0;
-        }
-    }
-    input[type="text"],
-    input[type="password"] {
-        border: 1px solid black;
-    }
-</style>
 
-<script>
-    setTimeout(function() {
-        var messagesElement = document.getElementById('messages');
-        if (messagesElement) {
-            messagesElement.style.animation = 'none';  
-            messagesElement.style.display = 'none';
-        }
-    }, 2000);
-</script>
 {% endblock %}
